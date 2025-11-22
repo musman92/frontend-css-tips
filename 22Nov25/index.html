@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #282c34;
+      margin: 0;
+      width: 100%;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .typing {
+      width: 36ch;
+      overflow: hidden;
+      border-right: 3px solid #fff;
+      white-space: nowrap;
+      font-size: 2rem;
+      color: white;
+      animation: typing 3s steps(36), blink .6s infinite alternate;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+    }
+    @keyframes blink {
+      to {
+        border-color: transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="typing">CSS is more powerful than you think!</h1>
+</body>
+</html>
