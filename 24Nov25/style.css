@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.content {
+  height: 100vh; /* Ensures footer is visible when scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text Animation Container */
+.text-container {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtitle Animation */
+.subtitle {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 2rem 0 1rem 0;
+  color: #ffffff;
+  animation: fadeInUp 2s ease-out 1s both;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0;
+  color: #cccccc;
+  animation: fadeInUp 2s ease-out 1.5s both;
+  letter-spacing: 0.1em;
+}
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
