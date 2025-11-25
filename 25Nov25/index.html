@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agency - Day 11</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Travel<span>Agency</span></h2>
+            </div>
+
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#destinations" class="nav-link">Destinations</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <div class="nav-menu-actions">
+                    <button class="nav-btn secondary">Sign In</button>
+                    <button class="nav-btn primary">Get Started</button>
+                </div>
+            </div>
+
+            <div class="nav-actions desktop-only">
+                <button class="nav-btn secondary">Sign In</button>
+                <button class="nav-btn primary">Get Started</button>
+            </div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <!-- Background Images -->
+        <div class="hero-bg">
+            <div class="bg-slide active" data-location="paris">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="Paris">
+            </div>
+            <div class="bg-slide" data-location="tokyo">
+                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Tokyo">
+            </div>
+            <div class="bg-slide" data-location="newyork">
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="New York">
+            </div>
+            <div class="bg-slide" data-location="bali">
+                <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1" alt="Bali">
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">Discover Your Dream Destination</h1>
+            <p class="hero-subtitle">Unforgettable journeys to the world's most beautiful places</p>
+
+            <div class="trip-details">
+                <div class="trip-header">
+                    <h2 class="location-name">Paris, France</h2>
+                    <div class="trip-price">
+                        <span class="price">$2,499</span>
+                        <span class="per-person">per person</span>
+                    </div>
+                </div>
+
+                <p class="location-description">Experience the magic of the City of Light with our exclusive 7-day Paris adventure. From the iconic Eiffel Tower to charming cafes along the Seine.</p>
+
+                <div class="trip-info">
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <span>7 Days / 6 Nights</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">👥</span>
+                        <span>Max 12 People</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">⭐</span>
+                        <span>4.8 Rating</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">✈️</span>
+                        <span>Flight Included</span>
+                    </div>
+                </div>
+
+                <div class="trip-highlights">
+                    <h3>Trip Highlights</h3>
+                    <ul>
+                        <li>Eiffel Tower visit with priority access</li>
+                        <li>Louvre Museum guided tour</li>
+                        <li>Seine River cruise dinner</li>
+                        <li>Montmartre district exploration</li>
+                        <li>Traditional French cooking class</li>
+                    </ul>
+                </div>
+
+                <button class="book-now-btn">
+                    <span>Book Now</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Location Cards - Fixed in Right Corner -->
+        <div class="location-cards">
+            <div class="location-card active" data-location="paris">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="Paris">
+                </div>
+                <div class="card-content">
+                    <h3>Paris</h3>
+                    <p>France</p>
+                    <span class="card-price">$2,499</span>
+                </div>
+            </div>
+
+            <div class="location-card" data-location="tokyo">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf" alt="Tokyo">
+                </div>
+                <div class="card-content">
+                    <h3>Tokyo</h3>
+                    <p>Japan</p>
+                    <span class="card-price">$3,299</span>
+                </div>
+            </div>
+
+            <div class="location-card" data-location="newyork">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9" alt="New York">
+                </div>
+                <div class="card-content">
+                    <h3>New York</h3>
+                    <p>USA</p>
+                    <span class="card-price">$2,899</span>
+                </div>
+            </div>
+
+            <div class="location-card" data-location="bali">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1" alt="Bali">
+                </div>
+                <div class="card-content">
+                    <h3>Bali</h3>
+                    <p>Indonesia</p>
+                    <span class="card-price">$1,999</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
