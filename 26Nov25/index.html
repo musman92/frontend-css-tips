@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #080808;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .neo-btn {
+      position: relative;
+      padding: 18px 55px;
+      font-size: 24px;
+      color: #fff;
+      background: rgba(20, 20, 20, 0.6);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      z-index: 1;
+      backdrop-filter: blur(6px);
+      overflow: hidden;
+      letter-spacing: 1px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    /* Animated gradient border */
+    .neo-btn::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      z-index: -1;
+      background: linear-gradient(130deg,
+        #ff00ff,
+        #00eaff,
+        #00ff6a,
+        #ffdd00,
+        #ff00ff);
+      background-size: 300%;
+      border-radius: inherit;
+      animation: rotateGradient 4s linear infinite;
+    }
+
+    /* Inner background */
+    .neo-btn::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      background: #0a0a0a;
+      border-radius: inherit;
+      z-index: -1;
+    }
+
+    @keyframes rotateGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hover effects */
+    .neo-btn:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 25px #00eaff, 0 0 50px #00eaff77;
+    }
+  </style>
+</head>
+<body>
+  <button class="neo-btn">Subscribe</button>
+</body>
+</html>
