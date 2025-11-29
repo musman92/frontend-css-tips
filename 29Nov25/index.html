@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0f0f;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .card {
+    width: 330px;
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.15);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s ease;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Hover transform */
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.35);
+    border-color: #00ffff;
+  }
+
+  /* Spinning glow background */
+  .card::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: -40%;
+    left: -40%;
+    background: linear-gradient(45deg, #00ffff, #0066ff);
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: rotate 6s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #00ffff;
+    margin-bottom: 15px;
+    transition: 0.4s;
+  }
+
+  /* Avatar hover */
+  .card:hover .avatar {
+    transform: scale(1.1) rotate(5deg);
+    border-color: #0099ff;
+  }
+
+  h2 {
+    margin: 10px 0 5px;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: #c9c9c9;
+    font-weight: 300;
+  }
+
+  /* Social Icons */
+  .social {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .social a {
+    font-size: 20px;
+    color: #00ffff;
+    transition: 0.3s;
+  }
+
+  .social a:hover {
+    color: #0099ff;
+    transform: translateY(-4px) scale(1.2);
+  }
+
+  /* Message Button */
+  .btn {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    background: linear-gradient(45deg, #00ffff, #0066ff);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00ffff;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <img class="avatar" src="https://i.pravatar.cc/150" alt="Profile">
+  <h2>John Smith</h2>
+  <p>UI/UX Designer</p>
+
+  <div class="social">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
+  </div>
+
+  <button class="btn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+</div>
+
+</body>
+</html>
