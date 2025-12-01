@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+  background: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  font-family: Poppins, sans-serif;
+}
+
+.product-card-glow {
+  width: 260px;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+  border-radius: 18px;
+  text-align: center;
+  transition: 0.35s;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,255,255,0.4);
+}
+
+.product-card-glow:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.4),
+    0 0 60px rgba(0, 255, 255, 0.25);
+}
+
+.product-card-glow .img-box {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.product-card-glow img {
+  width: 100%;
+  transition: 0.4s ease;
+}
+
+.product-card-glow:hover img {
+  transform: scale(1.1);
+}
+
+.product-card-glow .price {
+  font-size: 22px;
+  margin: 10px 0;
+  color: #00f4ff;
+}
+
+.buy-btn {
+  margin-top: 12px;
+  padding: 12px 18px;
+  background: #00f4ff;
+  color: #111;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.buy-btn:hover {
+  background: #0ff;
+  box-shadow: 
+    0 0 10px #00f4ff,
+    0 0 20px #00f4ff;
+}
+
+  </style>
+</head>
+<body>
+  <div class="product-card-glow">
+    <div class="img-box">
+      <img src="https://prd.place/250?id=14" alt="Product">
+    </div>
+    <h3>Wireless Headphones</h3>
+    <p class="price">$59.99</p>
+    <button class="buy-btn">Add to Cart</button>
+  </div>
+
+
+</body>
+</html>
