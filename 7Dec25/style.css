@@ -1,0 +1,156 @@
+body {
+  background: #0a0a0a;
+  font-family: Poppins, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding-top: 70px;
+}
+
+.carousel-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-container {
+  position: relative;
+  width: 900px;
+}
+
+.carousel {
+  display: flex;
+  position: relative;
+  height: 520px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  position: absolute;
+  width: 220px;
+  height: 380px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  opacity: 0;
+  transition: 0.6s ease;
+  transform-origin: center;
+  background: #111;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* INFO OVERLAY */
+.info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: #fff;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.info p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #e6e6e6;
+}
+
+/* CENTER BIG CARD */
+.item.active {
+  opacity: 1;
+  width: 330px;
+  height: 500px;
+  z-index: 5;
+  transform: translateX(0) scale(1);
+}
+
+/* LEFT + RIGHT SMALL CARDS */
+.item.left {
+  opacity: 0.8;
+  transform: translateX(-260px) scale(.75);
+  z-index: 4;
+}
+
+.item.right {
+  opacity: 0.8;
+  transform: translateX(260px) scale(.75);
+  z-index: 4;
+}
+
+/* FURTHER LEFT + RIGHT */
+.item.left-2 {
+  opacity: 0.5;
+  transform: translateX(-420px) scale(.55);
+  z-index: 2;
+}
+
+.item.right-2 {
+  opacity: 0.5;
+  transform: translateX(420px) scale(.55);
+  z-index: 2;
+}
+
+/* BOTTOM NAV */
+.bottom-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.nav-btn {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 150, 255, 0.2));
+  border: 2px solid rgba(0, 255, 255, 0.4);
+  color: #00ffff;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 150, 255, 0.3));
+  box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+  border-color: rgba(0, 255, 255, 0.6);
+  color: #fff;
+}
+
+.nav-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+
+/* PROGRESS BAR */
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: #00ffee;
+  transition: width 3s linear;
+}
