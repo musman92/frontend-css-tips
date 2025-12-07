@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at center, #04040a, #000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: Poppins, sans-serif;
+    }
+
+    /* Scene */
+    .holo-scene {
+      width: 380px;
+      height: 500px;
+      position: relative;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+    }
+
+    /* Hologram rotating ring */
+    .holo-ring {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      width: 260px;
+      height: 260px;
+      transform: translateX(-50%) translateZ(-30px);
+      border-radius: 50%;
+      border: 2px solid rgba(80,140,255,0.4);
+      box-shadow: 0 0 40px rgba(80,140,255,0.6);
+      animation: spin 8s linear infinite;
+    }
+
+    /* Glass Card */
+    .glass-card {
+      position: absolute;
+      width: 280px;
+      height: 330px;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(80px);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      box-shadow: 0 0 20px rgba(80,140,255,0.3),
+                  inset 0 0 20px rgba(80,140,255,0.2);
+      overflow: hidden;
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    /* Shine sweep */
+    .shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 120%;
+      height: 100%;
+      background: linear-gradient(
+          120deg,
+          transparent 0%,
+          rgba(255,255,255,0.25) 50%,
+          transparent 100%
+      );
+      animation: shineSweep 4s infinite;
+    }
+
+    /* Text */
+    .glass-card h2 {
+      text-align: center;
+      margin-top: 40px;
+      color: #fff;
+      font-size: 1.8rem;
+    }
+
+    .glass-card p {
+      margin-top: 6px;
+      text-align: center;
+      color: #cfcfcf;
+      font-size: 0.9rem;
+    }
+
+    /* Floating Light Streaks */
+    .light-streaks::before,
+    .light-streaks::after {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 80px;
+      left: 50%;
+      top: 100%;
+      background: linear-gradient(to top, #6a8bff, transparent);
+      animation: rise 3s infinite ease-out;
+      opacity: 0.7;
+    }
+
+    .light-streaks::after {
+      left: 60%;
+      height: 120px;
+      animation-duration: 4.2s;
+    }
+
+
+    .image-wrap {
+      width: 100%;
+      height: 160px;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 16px;
+      position: relative;
+    }
+
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translateZ(40px);
+      transition: 0.3s ease;
+    }
+
+    /* Soft glow under the image */
+    .image-wrap::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 80%;
+      height: 20px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(80,140,255,0.5), transparent);
+      filter: blur(12px);
+    }
+
+    /* 3D movement on hover */
+    .glass-card:hover img {
+      transform: scale(1.05) translateZ(60px);
+    }
+
+    /* Animations */
+    @keyframes spin {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    @keyframes shineSweep {
+      0% { left: -100%; }
+      55% { left: 200%; }
+      100% { left: 200%; }
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-250px); opacity: 0; }
+    }
+
+    @keyframes floatCard {
+      0% { transform: translateX(-50%) translateY(0) translateZ(80px); }
+      50% { transform: translateX(-50%) translateY(-25px) translateZ(80px); }
+      100% { transform: translateX(-50%) translateY(0) translateZ(80px); }
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="holo-scene">
+    <div class="holo-ring"></div>
+
+    <div class="glass-card">
+      <div class="image-wrap">
+        <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9" alt="UI Image">
+        <!-- <img src="https://images.unsplash.com/photo-1505820013142-f86a3439c5b2" alt="UI Image"> -->
+        <!-- <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716" alt="UI Image"> -->
+      </div>
+      
+      <h2>Quantum UI</h2>
+      <p>Futuristic hologram interface</p>
+
+      <div class="shine"></div>
+    </div>
+
+    <div class="light-streaks"></div>
+  </div>
+
+
+
+<script>
+const scene = document.querySelector('.holo-scene');
+
+document.addEventListener("mousemove", (e) => {
+  const x = (window.innerWidth / 2 - e.clientX) / 20;
+  const y = (window.innerHeight / 2 - e.clientY) / 20;
+
+  scene.style.transform = 
+    `rotateY(${x}deg) rotateX(${y}deg)`;
+});
+</script>
+
+</body>
+</html>

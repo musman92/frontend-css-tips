@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: Arial;
+      padding: 40px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Syntax box */
+    .syntax {
+      background: #1a1a1a;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      min-width: 260px;
+      border-left: 4px solid #4d8aff;
+      transition: 0.3s;
+    }
+
+    .syntax:hover {
+      background: #2a2a2a;
+      box-shadow: 0 0 12px #4d8aff;
+    }
+
+    /* UI box */
+    .ui-box {
+      display: flex;
+      gap: 8px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .item {
+      background: #222;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    /* Highlight effects */
+    .highlight {
+      background: #4d8aff !important;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* --------------------------- */
+    /*          Hovers             */
+    /* --------------------------- */
+
+    .first-child:hover + .ui-box .item:first-child {
+      background: #4d8aff; color: #000; transform: scale(1.05);
+    }
+
+    .last-child:hover + .ui-box .item:last-child {
+      background: #ff86e3; color: #000; transform: scale(1.05);
+    }
+
+    .nth-3:hover + .ui-box .item:nth-child(3) {
+      background: #56ffb7; color: #000; transform: scale(1.05);
+    }
+
+    .nth-odd:hover + .ui-box .item:nth-child(odd) {
+      background: #ffca6a; color: #000; transform: scale(1.05);
+    }
+
+    .nth-even:hover + .ui-box .item:nth-child(even) {
+      background: #9f8aff; color: #000; transform: scale(1.05);
+    }
+
+    .nth-n2:hover + .ui-box .item:nth-child(n+2) {
+      background: #7df2ff; color: #000; transform: scale(1.05);
+    }
+
+    .nth-2n:hover + .ui-box .item:nth-child(2n) {
+      background: #ff7b7b; color: #000; transform: scale(1.05);
+    }
+
+    .nth-2n2:hover + .ui-box .item:nth-child(2n+2) {
+      background: #5cff87; color: #000; transform: scale(1.05);
+    }
+
+    .nth-2n_2:hover + .ui-box .item:nth-child(2n-2) {
+      background: #ffc96a; color: #000; transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="showcase">
+
+  <!-- FIRST CHILD -->
+  <div class="row">
+    <div class="syntax first-child">.item:first-child</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- LAST CHILD -->
+  <div class="row">
+    <div class="syntax last-child">.item:last-child</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- NTH CHILD -->
+  <div class="row">
+    <div class="syntax nth-3">.item:nth-child(3)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- ODD -->
+  <div class="row">
+    <div class="syntax nth-odd">.item:nth-child(odd)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- EVEN -->
+  <div class="row">
+    <div class="syntax nth-even">.item:nth-child(even)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- n+2 -->
+  <div class="row">
+    <div class="syntax nth-n2">.item:nth-child(n+2)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- 2n -->
+  <div class="row">
+    <div class="syntax nth-2n">.item:nth-child(2n)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- 2n+2 -->
+  <div class="row">
+    <div class="syntax nth-2n2">.item:nth-child(2n+2)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+  <!-- 2n-2 -->
+  <div class="row">
+    <div class="syntax nth-2n_2">.item:nth-child(2n-2)</div>
+    <div class="ui-box">
+      <div class="item">1</div><div class="item">2</div><div class="item">3</div><div class="item">4</div>
+    </div>
+  </div>
+
+</div>
+
+
+</body>
+</html>

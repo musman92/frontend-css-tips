@@ -13,10 +13,6 @@ A futuristic cyberpunk-style product card with glowing effects, hover animations
 - **Smooth Transitions** - Professional 0.35s ease transitions
 - **Glassmorphism Elements** - Subtle transparency and blur effects
 
-## 🖼️ Screenshot
-
-![Cyberpunk Product Card](screenshot.png)
-
 ## 🎥 Video Demo
 
 Watch the full tutorial and demo on TikTok:
