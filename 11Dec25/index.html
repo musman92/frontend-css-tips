@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DriveEasy - Premium Car Rental Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+            'fade-in-down': 'fadeInDown 0.6s ease-out forwards',
+            'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+            'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+            'slide-in-down': 'slideInDown 0.3s ease-out forwards',
+            'scale-in': 'scaleIn 0.6s ease-out forwards',
+            'rotate-in': 'rotateIn 0.8s ease-out forwards',
+            'bounce-in': 'bounceIn 0.8s ease-out forwards',
+            'fade-out-up': 'fadeOutUp 0.4s ease-in forwards',
+            'fade-out-down': 'fadeOutDown 0.4s ease-in forwards',
+            'slide-out-right': 'slideOutRight 0.4s ease-in forwards',
+            'slide-out-left': 'slideOutLeft 0.4s ease-in forwards',
+            'scale-out': 'scaleOut 0.4s ease-in forwards',
+            'rotate-out': 'rotateOut 0.4s ease-in forwards',
+            'bounce-out': 'bounceOut 0.4s ease-in forwards',
+            'bounce-slow': 'bounce 2s infinite',
+            'pulse-slow': 'pulse 3s infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            fadeInDown: {
+              '0%': { opacity: '0', transform: 'translateY(-30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            slideInRight: {
+              '0%': { opacity: '0', transform: 'translateX(50px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' }
+            },
+            slideInLeft: {
+              '0%': { opacity: '0', transform: 'translateX(-50px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' }
+            },
+            slideInDown: {
+              '0%': { opacity: '0', transform: 'translateY(-20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(0.8)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            },
+            rotateIn: {
+              '0%': { opacity: '0', transform: 'rotate(-180deg) scale(0.8)' },
+              '100%': { opacity: '1', transform: 'rotate(0deg) scale(1)' }
+            },
+            bounceIn: {
+              '0%': { opacity: '0', transform: 'scale(0.3)' },
+              '50%': { opacity: '1', transform: 'scale(1.1)' },
+              '70%': { transform: 'scale(0.9)' },
+              '100%': { opacity: '1', transform: 'scale(1)' }
+            },
+            fadeOutUp: {
+              '0%': { opacity: '1', transform: 'translateY(0)' },
+              '100%': { opacity: '0', transform: 'translateY(-30px)' }
+            },
+            fadeOutDown: {
+              '0%': { opacity: '1', transform: 'translateY(0)' },
+              '100%': { opacity: '0', transform: 'translateY(30px)' }
+            },
+            slideOutRight: {
+              '0%': { opacity: '1', transform: 'translateX(0)' },
+              '100%': { opacity: '0', transform: 'translateX(50px)' }
+            },
+            slideOutLeft: {
+              '0%': { opacity: '1', transform: 'translateX(0)' },
+              '100%': { opacity: '0', transform: 'translateX(-50px)' }
+            },
+            scaleOut: {
+              '0%': { opacity: '1', transform: 'scale(1)' },
+              '100%': { opacity: '0', transform: 'scale(0.8)' }
+            },
+            rotateOut: {
+              '0%': { opacity: '1', transform: 'rotate(0deg) scale(1)' },
+              '100%': { opacity: '0', transform: 'rotate(180deg) scale(0.8)' }
+            },
+            bounceOut: {
+              '0%': { opacity: '1', transform: 'scale(1)' },
+              '30%': { transform: 'scale(1.1)' },
+              '100%': { opacity: '0', transform: 'scale(0.3)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <i class="fas fa-car text-white text-xl"></i>
+          </div>
+          <h1 class="text-2xl font-bold text-gray-800">DriveEasy</h1>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#fleet" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Fleet</a>
+          <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">How it Works</a>
+          <a href="#reviews" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Reviews</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors font-medium">Contact</a>
+          <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+            Book Now
+          </button>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+        <div class="flex flex-col space-y-4">
+          <a href="#fleet" class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 border-b border-gray-100">Fleet</a>
+          <a href="#how-it-works" class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 border-b border-gray-100">How it Works</a>
+          <a href="#reviews" class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 border-b border-gray-100">Reviews</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2 border-b border-gray-100">Contact</a>
+          <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 mt-4 w-full">
+            Book Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+        
+        <div class="md:hidden">
+          <button class="text-gray-700">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900"></div>
+    <div class="absolute inset-0 bg-black/40"></div>
+    
+    <!-- Car Image Carousel -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div id="carCarousel" class="relative w-full h-full">
+        <!-- Car Image 1 - Luxury Sedan -->
+        <div class="car-slide absolute inset-0 opacity-100 transition-opacity duration-1000">
+          <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+               alt="Luxury Sedan" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/50"></div>
+        </div>
+        
+        <!-- Car Image 2 - SUV -->
+        <div class="car-slide absolute inset-0 opacity-0 transition-opacity duration-1000">
+          <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+               alt="Luxury SUV" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/50"></div>
+        </div>
+        
+        <!-- Car Image 3 - Sports Car -->
+        <div class="car-slide absolute inset-0 opacity-0 transition-opacity duration-1000">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+               alt="Sports Car" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/50"></div>
+        </div>
+        
+        <!-- Car Image 4 - Electric Car -->
+        <div class="car-slide absolute inset-0 opacity-0 transition-opacity duration-1000">
+          <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+               alt="Electric Car" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/50"></div>
+        </div>
+        
+        <!-- Car Image 5 - Convertible -->
+        <div class="car-slide absolute inset-0 opacity-0 transition-opacity duration-1000">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+               alt="Convertible" 
+               class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-purple-900/50"></div>
+        </div>
+      </div>
+      
+      <!-- Carousel Indicators -->
+      <div class="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+        <button class="carousel-dot w-3 h-3 rounded-full bg-white/50 transition-all duration-300 active" data-slide="0"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300" data-slide="1"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300" data-slide="2"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300" data-slide="3"></button>
+        <button class="carousel-dot w-3 h-3 rounded-full bg-white/30 hover:bg-white/50 transition-all duration-300" data-slide="4"></button>
+      </div>
+    </div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-xl animate-pulse-slow"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-xl animate-bounce-slow"></div>
+    
+    <div class="relative z-10 container mx-auto px-4 text-center text-white">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-down" style="animation-delay: 0.2s;">
+          Drive Your
+          <span class="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+            Dreams
+          </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl mb-8 text-gray-200 opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+          Premium car rental service with the finest fleet. Experience luxury, comfort, and reliability on every journey.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12 opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+          <button class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+            <i class="fas fa-search mr-2"></i>
+            Browse Fleet
+          </button>
+          <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300">
+            <i class="fas fa-phone mr-2"></i>
+            Call Now
+          </button>
+        </div>
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-yellow-400 mb-2">500+</div>
+            <div class="text-sm text-gray-300">Premium Cars</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-yellow-400 mb-2">50K+</div>
+            <div class="text-sm text-gray-300">Happy Customers</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-bold text-yellow-400 mb-2">25+</div>
+            <div class="text-sm text-gray-300">Cities Served</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+      <i class="fas fa-chevron-down text-2xl"></i>
+    </div>
+  </section>
+
+  <!-- Trust and Authority Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-on-scroll" data-animation="fade-in-up">Trusted by Industry Leaders</h2>
+        <p class="text-gray-600 text-lg animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">Join thousands of satisfied customers who trust DriveEasy</p>
+      </div>
+      
+      <!-- Trust Badges -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 stagger-children animate-on-scroll" data-animation="stagger">
+        <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <i class="fas fa-shield-alt text-4xl text-green-500 mb-4"></i>
+          <h3 class="font-semibold text-gray-800 mb-2">Fully Insured</h3>
+          <p class="text-gray-600 text-sm">Comprehensive coverage included</p>
+        </div>
+        <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <i class="fas fa-clock text-4xl text-blue-500 mb-4"></i>
+          <h3 class="font-semibold text-gray-800 mb-2">24/7 Support</h3>
+          <p class="text-gray-600 text-sm">Round-the-clock assistance</p>
+        </div>
+        <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <i class="fas fa-award text-4xl text-yellow-500 mb-4"></i>
+          <h3 class="font-semibold text-gray-800 mb-2">Award Winning</h3>
+          <p class="text-gray-600 text-sm">Industry recognition</p>
+        </div>
+        <div class="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
+          <i class="fas fa-thumbs-up text-4xl text-purple-500 mb-4"></i>
+          <h3 class="font-semibold text-gray-800 mb-2">Top Rated</h3>
+          <p class="text-gray-600 text-sm">5-star customer rating</p>
+        </div>
+      </div>
+      
+      <!-- Partner Logos -->
+      <div class="animate-on-scroll" data-animation="fade-in-up" data-delay="0.4">
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8 lg:gap-12">
+          <div class="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 w-24 h-16 md:w-28 md:h-20 flex items-center justify-center">
+            <img src="images/mercedes.png" alt="Mercedes-Benz" class="max-w-full max-h-full object-contain" 
+                 onerror="this.src='https://cdn.worldvectorlogo.com/logos/mercedes-benz-9.svg'">
+          </div>
+          
+          <div class="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 w-24 h-16 md:w-28 md:h-20 flex items-center justify-center">
+            <img src="images/bmw.png" alt="BMW" class="max-w-full max-h-full object-contain"
+                 onerror="this.src='https://cdn.worldvectorlogo.com/logos/bmw.svg'">
+          </div>
+          
+          <div class="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 w-24 h-16 md:w-28 md:h-20 flex items-center justify-center">
+            <img src="images/audi.png" alt="Audi" class="max-w-full max-h-full object-contain"
+                 onerror="this.src='https://cdn.worldvectorlogo.com/logos/audi-11.svg'">
+          </div>
+          
+          <div class="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 w-24 h-16 md:w-28 md:h-20 flex items-center justify-center">
+            <img src="images/tesla.png" alt="Tesla" class="max-w-full max-h-full object-contain"
+                 onerror="this.src='https://cdn.worldvectorlogo.com/logos/tesla-9.svg'">
+          </div>
+          
+          <div class="grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 w-24 h-16 md:w-28 md:h-20 flex items-center justify-center">
+            <img src="images/porsche.png" alt="Porsche" class="max-w-full max-h-full object-contain"
+                 onerror="this.src='https://cdn.worldvectorlogo.com/logos/porsche-2.svg'">
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+
+
+  </section>
+
+  <!-- Fleet Overview -->
+  <section id="fleet" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-gray-800 mb-6 animate-on-scroll" data-animation="fade-in-down">Our Premium Fleet</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">
+          Choose from our carefully curated collection of luxury and economy vehicles
+        </p>
+      </div>
+      
+      <!-- Category Tabs -->
+      <div class="flex justify-center mb-12">
+        <div class="flex bg-white rounded-full p-2 shadow-lg animate-on-scroll" data-animation="scale-in" data-delay="0.3">
+          <button class="fleet-tab px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold transition-all duration-300 transform hover:scale-105" data-category="luxury">Luxury</button>
+          <button class="fleet-tab px-6 py-3 mx-2 rounded-full text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-md" data-category="economy">Economy</button>
+          <button class="fleet-tab px-6 py-3 mx-2 rounded-full text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-md" data-category="suv">SUV</button>
+          <button class="fleet-tab px-6 py-3 rounded-full text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-md" data-category="sports">Sports</button>
+        </div>
+      </div>
+      
+      <!-- Car Cards -->
+      <div id="carGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children animate-on-scroll" data-animation="stagger">
+        <!-- Luxury Cars -->
+        <div class="car-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="luxury">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Mercedes S-Class" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Mercedes S-Class</h3>
+            <p class="text-gray-600 mb-4">Luxury sedan with premium features</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>4 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Premium</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$89</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="luxury">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="BMW 7 Series" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">BMW 7 Series</h3>
+            <p class="text-gray-600 mb-4">Executive luxury with innovative technology</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>5 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Premium</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$95</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="luxury">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Tesla Model S" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Tesla Model S</h3>
+            <p class="text-gray-600 mb-4">Electric luxury with autopilot</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>5 Seats</span>
+              <span><i class="fas fa-bolt mr-1"></i>Electric</span>
+              <span><i class="fas fa-wifi mr-1"></i>Tech</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$99</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Economy Cars -->
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="economy">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1638618164682-12b986ec2a75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Toyota Corolla" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Toyota Corolla</h3>
+            <p class="text-gray-600 mb-4">Reliable and fuel-efficient compact car</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>5 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Economy</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$35</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="economy">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1634737581963-5a22ba471961?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Honda Civic" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Honda Civic</h3>
+            <p class="text-gray-600 mb-4">Compact car with excellent fuel economy</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>5 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Economy</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$32</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="economy">
+          <div class="relative">
+            <img src="https://wieck-nissanao-production.s3.amazonaws.com/photos/6f0bd903d18d779d854299b35edbfe0366828e96/preview-928x522.jpg" 
+                 alt="Nissan Versa" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Nissan Versa</h3>
+            <p class="text-gray-600 mb-4">Budget-friendly with great value</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>5 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Economy</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$28</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUV Cars -->
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="suv">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="BMW X5" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">BMW X5</h3>
+            <p class="text-gray-600 mb-4">Luxury SUV for family adventures</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>7 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Premium</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$79</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="suv">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Audi Q7" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Audi Q7</h3>
+            <p class="text-gray-600 mb-4">Spacious luxury SUV with premium interior</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>7 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-gas-pump mr-1"></i>Premium</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$85</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="suv">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Tesla Model X" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Popular
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Tesla Model X</h3>
+            <p class="text-gray-600 mb-4">Electric SUV with falcon wing doors</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>7 Seats</span>
+              <span><i class="fas fa-bolt mr-1"></i>Electric</span>
+              <span><i class="fas fa-wifi mr-1"></i>Tech</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$105</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sports Cars -->
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="sports">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Porsche 911" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Porsche 911</h3>
+            <p class="text-gray-600 mb-4">Iconic sports car with legendary performance</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>2 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Manual</span>
+              <span><i class="fas fa-tachometer-alt mr-1"></i>Sports</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$199</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="sports">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="BMW Z4" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Available
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">BMW Z4</h3>
+            <p class="text-gray-600 mb-4">Convertible roadster for open-air driving</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>2 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-tachometer-alt mr-1"></i>Sports</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$149</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="car-card hidden bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" data-category="sports">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                 alt="Mercedes AMG GT" class="w-full h-48 object-cover">
+            <div class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              Premium
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Mercedes AMG GT</h3>
+            <p class="text-gray-600 mb-4">High-performance sports car</p>
+            
+            <div class="flex items-center gap-4 mb-4 text-sm text-gray-500">
+              <span><i class="fas fa-users mr-1"></i>2 Seats</span>
+              <span><i class="fas fa-cog mr-1"></i>Auto</span>
+              <span><i class="fas fa-tachometer-alt mr-1"></i>Sports</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-3xl font-bold text-blue-600">$249</span>
+                <span class="text-gray-500">/day</span>
+              </div>
+              <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <button class="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300">
+          View All Vehicles
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-gray-800 mb-6 animate-on-scroll" data-animation="fade-in-down">How It Works</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">
+          Rent a car in just 3 simple steps
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto stagger-children animate-on-scroll" data-animation="stagger">
+        <!-- Step 1 -->
+        <div class="text-center relative">
+          <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 transform hover:scale-110 transition-transform">
+            1
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Choose Your Car</h3>
+          <p class="text-gray-600 mb-6">Browse our premium fleet and select the perfect vehicle for your journey. Filter by type, price, and features.</p>
+          <i class="fas fa-search text-4xl text-blue-500"></i>
+          
+          <!-- Connecting Line -->
+          <div class="hidden md:block absolute top-10 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="text-center relative">
+          <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 transform hover:scale-110 transition-transform">
+            2
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Book & Pay</h3>
+          <p class="text-gray-600 mb-6">Complete your reservation with our secure booking system. Instant confirmation and flexible payment options.</p>
+          <i class="fas fa-credit-card text-4xl text-green-500"></i>
+          
+          <!-- Connecting Line -->
+          <div class="hidden md:block absolute top-10 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 transform hover:scale-110 transition-transform">
+            3
+          </div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">Drive Away</h3>
+          <p class="text-gray-600 mb-6">Pick up your car at your chosen location or get it delivered. Start your journey with peace of mind.</p>
+          <i class="fas fa-key text-4xl text-yellow-500"></i>
+        </div>
+      </div>
+      
+      <!-- CTA -->
+      <div class="text-center mt-16">
+        <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-full text-lg font-semibold hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 animate-on-scroll" data-animation="bounce-in" data-delay="0.6">
+          Start Your Journey
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof and Reviews -->
+  <section id="reviews" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-gray-800 mb-6 animate-on-scroll" data-animation="fade-in-down">What Our Customers Say</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">
+          Don't just take our word for it - hear from thousands of satisfied customers
+        </p>
+      </div>
+      
+      <!-- Reviews Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Review 1 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="slide-in-left" data-delay="0.1">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 text-xl animate-on-scroll" data-animation="bounce-in" data-delay="0.3">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6 italic animate-on-scroll" data-animation="fade-in-up" data-delay="0.4">"Absolutely amazing service! The car was spotless and the booking process was seamless. Will definitely use DriveEasy again."</p>
+          <div class="flex items-center animate-on-scroll" data-animation="slide-in-right" data-delay="0.5">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold mr-4 transform transition-transform duration-300 hover:rotate-12">
+              S
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-800">Sarah Johnson</h4>
+              <p class="text-gray-500 text-sm">Business Executive</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review 2 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 text-xl animate-on-scroll" data-animation="bounce-in" data-delay="0.4">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6 italic animate-on-scroll" data-animation="fade-in-up" data-delay="0.5">"Great fleet selection and competitive prices. The Tesla was a dream to drive. Customer service was exceptional."</p>
+          <div class="flex items-center animate-on-scroll" data-animation="slide-in-left" data-delay="0.6">
+            <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-blue-400 rounded-full flex items-center justify-center text-white font-bold mr-4 transform transition-transform duration-300 hover:rotate-12">
+              M
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-800">Michael Chen</h4>
+              <p class="text-gray-500 text-sm">Tech Entrepreneur</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Review 3 -->
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="slide-in-right" data-delay="0.3">
+          <div class="flex items-center mb-4">
+            <div class="flex text-yellow-400 text-xl animate-on-scroll" data-animation="bounce-in" data-delay="0.5">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-6 italic animate-on-scroll" data-animation="fade-in-up" data-delay="0.6">"Perfect for our family vacation. The SUV was comfortable and reliable. Easy pickup and drop-off process."</p>
+          <div class="flex items-center animate-on-scroll" data-animation="slide-in-right" data-delay="0.7">
+            <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-red-400 rounded-full flex items-center justify-center text-white font-bold mr-4 transform transition-transform duration-300 hover:rotate-12">
+              E
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-800">Emily Rodriguez</h4>
+              <p class="text-gray-500 text-sm">Family Traveler</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Trust Indicators -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div class="p-6 rounded-xl hover:bg-white/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="scale-in" data-delay="0.1">
+          <div class="text-4xl font-bold text-blue-600 mb-2 animate-on-scroll" data-animation="bounce-in" data-delay="0.3">4.9/5</div>
+          <p class="text-gray-600 animate-on-scroll" data-animation="fade-in-up" data-delay="0.4">Average Rating</p>
+        </div>
+        <div class="p-6 rounded-xl hover:bg-white/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="scale-in" data-delay="0.2">
+          <div class="text-4xl font-bold text-green-600 mb-2 animate-on-scroll" data-animation="bounce-in" data-delay="0.4">50K+</div>
+          <p class="text-gray-600 animate-on-scroll" data-animation="fade-in-up" data-delay="0.5">Happy Customers</p>
+        </div>
+        <div class="p-6 rounded-xl hover:bg-white/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="scale-in" data-delay="0.3">
+          <div class="text-4xl font-bold text-purple-600 mb-2 animate-on-scroll" data-animation="bounce-in" data-delay="0.5">99.8%</div>
+          <p class="text-gray-600 animate-on-scroll" data-animation="fade-in-up" data-delay="0.6">Uptime</p>
+        </div>
+        <div class="p-6 rounded-xl hover:bg-white/50 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-on-scroll" data-animation="scale-in" data-delay="0.4">
+          <div class="text-4xl font-bold text-yellow-600 mb-2 animate-on-scroll" data-animation="bounce-in" data-delay="0.6">24/7</div>
+          <p class="text-gray-600">Support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location and Contact -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-5xl font-bold text-gray-800 mb-6 animate-on-scroll" data-animation="fade-in-down">Find Us Near You</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll" data-animation="fade-in-up" data-delay="0.2">
+          With locations across 25+ cities, we're always close by
+        </p>
+      </div>
+      
+      <div class="grid lg:grid-cols-2 gap-16">
+        <!-- Contact Info -->
+        <div class="animate-on-scroll" data-animation="slide-in-left">
+          <h3 class="text-3xl font-bold text-gray-800 mb-8">Get in Touch</h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white mr-4">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Phone</h4>
+                <p class="text-gray-600">+1 (555) 123-4567</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white mr-4">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Email</h4>
+                <p class="text-gray-600">hello@driveeasy.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white mr-4">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-800">Headquarters</h4>
+                <p class="text-gray-600">123 Drive Street, Auto City, AC 12345</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Contact Form -->
+          <div class="mt-12 bg-gray-50 p-8 rounded-2xl">
+            <h4 class="text-xl font-bold text-gray-800 mb-6">Quick Contact</h4>
+            <form class="space-y-4">
+              <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none transition-colors">
+              <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none transition-colors">
+              <textarea placeholder="Your Message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-600 focus:outline-none transition-colors"></textarea>
+              <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Map/Locations -->
+        <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+          <div class="bg-gradient-to-br from-blue-600 to-purple-600 p-8 rounded-2xl text-white mb-8">
+            <h3 class="text-2xl font-bold mb-6">Our Locations</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                <h4 class="font-semibold mb-2">Downtown</h4>
+                <p class="text-sm opacity-80">Main St & 5th Ave</p>
+                <p class="text-sm opacity-80">Open 24/7</p>
+              </div>
+              <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                <h4 class="font-semibold mb-2">Airport</h4>
+                <p class="text-sm opacity-80">Terminal 1 & 2</p>
+                <p class="text-sm opacity-80">Open 24/7</p>
+              </div>
+              <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                <h4 class="font-semibold mb-2">Business District</h4>
+                <p class="text-sm opacity-80">Corporate Plaza</p>
+                <p class="text-sm opacity-80">6AM - 10PM</p>
+              </div>
+              <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm">
+                <h4 class="font-semibold mb-2">Shopping Mall</h4>
+                <p class="text-sm opacity-80">MegaMall Level 1</p>
+                <p class="text-sm opacity-80">10AM - 9PM</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Interactive Map -->
+          <div class="h-96 rounded-2xl overflow-hidden shadow-lg">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1670123456789!5m2!1sen!2sus" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="rounded-2xl">
+            </iframe>
+          </div>
+              <p class="text-sm text-gray-500">Find the nearest location</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Company Info -->
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-car text-white text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold">DriveEasy</h3>
+          </div>
+          <p class="text-gray-400 mb-6">Your trusted partner for premium car rental experiences. Drive with confidence, drive with style.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#fleet" class="hover:text-white transition-colors">Our Fleet</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Locations</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+            <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Services -->
+        <div>
+          <h4 class="text-xl font-bold mb-6">Services</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li><a href="#" class="hover:text-white transition-colors">Daily Rentals</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Long-term Lease</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Corporate Fleet</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Airport Transfer</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Chauffeur Service</a></li>
+          </ul>
+        </div>
+        
+        <!-- Newsletter -->
+        <div>
+          <h4 class="text-xl font-bold mb-6">Stay Updated</h4>
+          <p class="text-gray-400 mb-4">Subscribe to get special offers and updates</p>
+          <div class="flex">
+            <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 border border-gray-700 focus:border-blue-600 focus:outline-none">
+            <button class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-2 rounded-r-lg hover:shadow-lg transition-shadow">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Bottom Footer -->
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400">&copy; 2025 DriveEasy. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Custom Scripts -->
+  <script>
+    // Fleet Tab Functionality
+    function initializeFleetTabs() {
+      const tabs = document.querySelectorAll('.fleet-tab');
+      const carCards = document.querySelectorAll('.car-card');
+      
+      function showCategory(category) {
+        // Hide all cars
+        carCards.forEach(card => {
+          card.classList.add('hidden');
+        });
+        
+        // Show cars of selected category
+        const categoryCards = document.querySelectorAll(`[data-category="${category}"]`);
+        categoryCards.forEach(card => {
+          card.classList.remove('hidden');
+        });
+        
+        // Update tab styles
+        tabs.forEach(tab => {
+          tab.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+          tab.classList.add('text-gray-700');
+        });
+        
+        // Highlight active tab
+        const activeTab = document.querySelector(`[data-category="${category}"]`);
+        if (activeTab && activeTab.classList.contains('fleet-tab')) {
+          activeTab.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+          activeTab.classList.remove('text-gray-700');
+        }
+      }
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const category = tab.getAttribute('data-category');
+          showCategory(category);
+        });
+      });
+      
+      // Show luxury cars by default
+      showCategory('luxury');
+    }
+    
+    // Car Carousel Functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.car-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const totalSlides = slides.length;
+    
+    function showSlide(index) {
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.style.opacity = '0';
+      });
+      
+      // Remove active class from all dots
+      dots.forEach(dot => {
+        dot.classList.remove('active', 'bg-white/80');
+        dot.classList.add('bg-white/30');
+      });
+      
+      // Show current slide
+      slides[index].style.opacity = '1';
+      
+      // Highlight current dot
+      dots[index].classList.add('active', 'bg-white/80');
+      dots[index].classList.remove('bg-white/30');
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+    
+    // Auto-advance carousel every 4 seconds
+    setInterval(nextSlide, 4000);
+    
+    // Manual dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+    
+    // Advanced Bidirectional Animation Observer
+    let lastScrollY = window.scrollY;
+    
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const element = entry.target;
+        const animationType = element.getAttribute('data-animation');
+        const delay = element.getAttribute('data-delay') || 0;
+        const currentScrollY = window.scrollY;
+        const isScrollingDown = currentScrollY > lastScrollY;
+        
+        if (entry.isIntersecting) {
+          // Clear any existing animation classes first
+          element.classList.remove('fade-out-down', 'fade-out-up', 'slide-out-left', 'slide-out-right', 'scale-out', 'rotate-out', 'bounce-out');
+          
+          setTimeout(() => {
+            switch(animationType) {
+              case 'fade-in-up':
+                element.classList.add('fade-in-up');
+                element.classList.remove('fade-out-down');
+                break;
+              case 'fade-in-down':
+                element.classList.add('fade-in-down');
+                element.classList.remove('fade-out-up');
+                break;
+              case 'slide-in-left':
+                element.classList.add('slide-in-left');
+                element.classList.remove('slide-out-right');
+                break;
+              case 'slide-in-right':
+                element.classList.add('slide-in-right');
+                element.classList.remove('slide-out-left');
+                break;
+              case 'scale-in':
+                element.classList.add('scale-in');
+                element.classList.remove('scale-out');
+                break;
+              case 'rotate-in':
+                element.classList.add('rotate-in');
+                element.classList.remove('rotate-out');
+                break;
+              case 'bounce-in':
+                element.classList.add('bounce-in');
+                element.classList.remove('bounce-out');
+                break;
+              case 'stagger':
+                element.classList.add('animated');
+                break;
+              default:
+                element.classList.add('animated');
+            }
+          }, delay * 1000);
+        } else {
+          // Element is leaving viewport - trigger reverse animation
+          setTimeout(() => {
+            switch(animationType) {
+              case 'fade-in-up':
+                element.classList.remove('fade-in-up');
+                element.classList.add('fade-out-down');
+                break;
+              case 'fade-in-down':
+                element.classList.remove('fade-in-down');
+                element.classList.add('fade-out-up');
+                break;
+              case 'slide-in-left':
+                element.classList.remove('slide-in-left');
+                element.classList.add('slide-out-right');
+                break;
+              case 'slide-in-right':
+                element.classList.remove('slide-in-right');
+                element.classList.add('slide-out-left');
+                break;
+              case 'scale-in':
+                element.classList.remove('scale-in');
+                element.classList.add('scale-out');
+                break;
+              case 'rotate-in':
+                element.classList.remove('rotate-in');
+                element.classList.add('rotate-out');
+                break;
+              case 'bounce-in':
+                element.classList.remove('bounce-in');
+                element.classList.add('bounce-out');
+                break;
+              case 'stagger':
+                element.classList.remove('animated');
+                break;
+              default:
+                element.classList.remove('animated');
+            }
+          }, 50);
+        }
+        
+        lastScrollY = currentScrollY;
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    // Observe all elements with animation attributes
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      animationObserver.observe(el);
+    });
+    
+    // Parallax effect for background elements
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.parallax');
+      
+      parallaxElements.forEach(element => {
+        const speed = element.getAttribute('data-speed') || 0.5;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+    
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.add('opacity-0', 'invisible');
+        backToTopButton.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+    
+    // Counter animation for statistics
+    function animateCounters() {
+      const counters = document.querySelectorAll('[data-counter]');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-counter'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          counter.textContent = Math.floor(current).toLocaleString();
+        }, 16);
+      });
+    }
+    
+    // Initialize animations when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add loading animation to body
+      document.body.classList.add('loaded');
+      
+      // Initialize fleet tabs
+      initializeFleetTabs();
+      
+      // Mobile menu toggle functionality
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = mobileMenuBtn.querySelector('svg path');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        
+        // Animate hamburger to X
+        if (mobileMenu.classList.contains('hidden')) {
+          // Show hamburger
+          menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        } else {
+          // Show X
+          menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        }
+        
+        // Add slide animation
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.style.animation = 'slideInDown 0.3s ease-out forwards';
+        }
+      });
+      
+      // Close mobile menu when clicking on nav links
+      const mobileNavLinks = mobileMenu.querySelectorAll('a');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        });
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+          menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        }
+      });
+      
+      // Start counter animations after delay
+      setTimeout(animateCounters, 1000);
+    });
+  </script>
+
+</body>
+</html>
