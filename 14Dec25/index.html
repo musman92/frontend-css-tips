@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <h1>CSS Display Visualizer</h1>
+  <p class="subtitle">Select a display value to see it live</p>
+
+  <div class="controls">
+    <label><input type="radio" name="display" value="block" checked> block</label>
+    <label><input type="radio" name="display" value="inline"> inline</label>
+    <label><input type="radio" name="display" value="inline-block"> inline-block</label>
+    <label><input type="radio" name="display" value="flex"> flex</label>
+    <label><input type="radio" name="display" value="grid"> grid</label>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview" id="preview"></div>
+
+  <!-- Description -->
+  <p class="description" id="description"></p>
+</div>
+
+
+<script>
+  const radios = document.querySelectorAll('input[name="display"]');
+  const preview = document.getElementById('preview');
+  const description = document.getElementById('description');
+
+  function render(type) {
+    preview.innerHTML = '';
+    preview.style.display = 'block';
+    preview.style.gap = '';
+    preview.style.gridTemplateColumns = '';
+
+    if (type === 'inline' || type === 'inline-block') {
+      preview.innerHTML = `
+        This is
+        <span class="text-item">Item A</span>
+        <span class="text-item">Item B</span>
+        <span class="text-item">Item C</span>
+        inside text.
+      `;
+
+      document.querySelectorAll('.text-item').forEach(item => {
+        item.style.display = type;
+      });
+
+      description.innerHTML =
+        type === 'inline'
+          ? '<span class="highlight">Inline</span> elements flow with text and ignore width & height.'
+          : '<span class="highlight">Inline-block</span> elements stay inline but respect width & height.';
+      return;
+    }
+
+    // Box-based layouts
+    preview.innerHTML = `
+      <div class="box">Item 1</div>
+      <div class="box">Item 2</div>
+      <div class="box">Item 3</div>
+    `;
+
+    preview.style.display = type;
+
+    if (type === 'flex') {
+      preview.style.gap = '10px';
+      preview.style.justifyContent = 'space-between';
+      description.innerHTML =
+        '<span class="highlight">Flex</span> layouts arrange items in one direction with flexible control.';
+    }
+
+    if (type === 'grid') {
+      preview.style.gridTemplateColumns = 'repeat(3, 1fr)';
+      preview.style.gap = '10px';
+      description.innerHTML =
+        '<span class="highlight">Grid</span> layouts create rows and columns for two-dimensional layouts.';
+    }
+
+    if (type === 'block') {
+      description.innerHTML =
+        '<span class="highlight">Block</span> elements take full width and start on a new line.';
+    }
+  }
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => render(radio.value));
+  });
+
+  // Initial render
+  render('block');
+</script>
+
+
+</body>
+</html>
