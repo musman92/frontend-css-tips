@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netflix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Netflix+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #141414;
+      color: #fff;
+      font-family: 'Netflix Sans', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .header.scrolled {
+      background: #141414;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #e50914;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #e50914;
+    }
+
+    .profile {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: #e50914;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, transparent 50%),
+                  url('images/cover.webp') no-repeat center center/cover;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      line-height: 1.4;
+      margin-bottom: 24px;
+      color: #ccc;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: rgba(255,255,255,0.8);
+    }
+
+    .btn-secondary {
+      background: rgba(109, 109, 110, 0.7);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(109, 109, 110, 0.4);
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      margin-top: -100px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .container {
+      padding: 0 60px;
+      margin-bottom: 50px;
+    }
+
+    /* ROW TITLE */
+    .row-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .row-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .row-header .row-title {
+      margin-bottom: 0;
+    }
+
+    /* ROW WRAPPER */
+    .row-wrapper {
+      position: relative;
+      margin-bottom: 60px;
+    }
+
+    .row {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .row::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ARROWS */
+    .arrow {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      background: linear-gradient(to right, rgba(20,20,20,0.8) 0%, rgba(20,20,20,0.4) 50%, transparent 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 20;
+      font-size: 24px;
+    }
+
+    .row-wrapper:hover .arrow {
+      opacity: 1;
+    }
+
+    .arrow:hover {
+      background: linear-gradient(to right, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.6) 50%, transparent 100%);
+    }
+
+    .arrow.right {
+      right: 0;
+      background: linear-gradient(to left, rgba(20,20,20,0.8) 0%, rgba(20,20,20,0.4) 50%, transparent 100%);
+    }
+
+    .arrow.right:hover {
+      background: linear-gradient(to left, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.6) 50%, transparent 100%);
+    }
+
+    .arrow span {
+      color: #fff;
+      user-select: none;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.8));
+    }
+
+    /* CARD */
+    .card {
+      min-width: 200px;
+      max-width: 250px;
+      height: 300px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.12);
+      z-index: 10;
+      border-radius: 6px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card:hover img {
+      transform: scale(1.02);
+    }
+
+    /* HOVER OVERLAY */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0.4) 70%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .card:hover .overlay {
+      opacity: 1;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .meta {
+      font-size: 14px;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rating {
+      color: #46d369;
+      font-weight: 500;
+    }
+
+    .duration {
+      color: #bbb;
+    }
+
+    .genre {
+      color: #bbb;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn.play {
+      background: #fff;
+      color: #000;
+    }
+
+    .btn.play:hover {
+      background: rgba(255,255,255,0.9);
+      transform: scale(1.05);
+    }
+
+    .btn.info {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn.info:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+
+    /* DOTS */
+    .dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .dot:hover {
+      background: rgba(255,255,255,0.6);
+      transform: scale(1.1);
+    }
+
+    .dot.active {
+      background: rgba(255,255,255,0.9);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .header {
+        padding: 20px 20px;
+      }
+
+      .hero {
+        padding: 0 20px;
+        height: 80vh;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .card {
+        min-width: 160px;
+        height: 240px;
+      }
+
+      .arrow {
+        width: 40px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .dots {
+        display: none;
+      }
+    }
+
+    /* LOADING ANIMATION */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">NETFLIX</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">TV Shows</a>
+      <a href="#">Movies</a>
+      <a href="#">New & Popular</a>
+      <a href="#">My List</a>
+    </nav>
+    <div class="profile">U</div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Stranger Things</h1>
+      <p class="hero-description">
+        When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn-primary">
+          <span>▶</span> Play
+        </button>
+        <button class="btn-secondary">
+          <span>ℹ</span> More Info
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <div class="container">
+
+      <div class="row-header">
+        <h2 class="row-title">Trending Now</h2>
+        <div class="dots">
+          <span class="dot active" onclick="scrollToPage(this, 0)"></span>
+          <span class="dot" onclick="scrollToPage(this, 1)"></span>
+          <span class="dot" onclick="scrollToPage(this, 2)"></span>
+        </div>
+      </div>
+      <div class="row-wrapper">
+        <div class="arrow left" onclick="scrollRow(this, -1)"><span>‹</span></div>
+        <div class="row">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Crown</div>
+              <div class="meta">
+                <span class="rating">98% Match</span>
+                <span class="duration">2h 15m</span>
+                <span class="genre">Drama</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m1.webp">
+            <div class="overlay">
+              <div class="title">Money Heist</div>
+              <div class="meta">
+                <span class="rating">97% Match</span>
+                <span class="duration">1h 45m</span>
+                <span class="genre">Crime</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Dark</div>
+              <div class="meta">
+                <span class="rating">95% Match</span>
+                <span class="duration">1h 30m</span>
+                <span class="genre">Sci-Fi</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/m4.jpg">
+            <div class="overlay">
+              <div class="title">Breaking Bad</div>
+              <div class="meta">
+                <span class="rating">96% Match</span>
+                <span class="duration">49m</span>
+                <span class="genre">Crime</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Witcher</div>
+              <div class="meta">
+                <span class="rating">94% Match</span>
+                <span class="duration">1h 20m</span>
+                <span class="genre">Fantasy</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/m4.jpg">
+            <div class="overlay">
+              <div class="title">Narcos</div>
+              <div class="meta">
+                <span class="rating">93% Match</span>
+                <span class="duration">55m</span>
+                <span class="genre">Crime</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow right" onclick="scrollRow(this, 1)"><span>›</span></div>
+      </div>
+
+      <div class="row-header">
+        <h2 class="row-title">Popular on Netflix</h2>
+        <div class="dots">
+          <span class="dot active" onclick="scrollToPage(this, 0)"></span>
+          <span class="dot" onclick="scrollToPage(this, 1)"></span>
+          <span class="dot" onclick="scrollToPage(this, 2)"></span>
+        </div>
+      </div>
+      <div class="row-wrapper">
+        <div class="arrow left" onclick="scrollRow(this, -1)"><span>‹</span></div>
+        <div class="row">
+          <div class="card">
+            <img src="/images/m3.jpg">
+            <div class="overlay">
+              <div class="title">Squid Game</div>
+              <div class="meta">
+                <span class="rating">99% Match</span>
+                <span class="duration">1h 40m</span>
+                <span class="genre">Thriller</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Wednesday</div>
+              <div class="meta">
+                <span class="rating">97% Match</span>
+                <span class="duration">45m</span>
+                <span class="genre">Mystery</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Queen's Gambit</div>
+              <div class="meta">
+                <span class="rating">96% Match</span>
+                <span class="duration">1h 5m</span>
+                <span class="genre">Drama</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m2.jpg">
+            <div class="overlay">
+              <div class="title">Bridgerton</div>
+              <div class="meta">
+                <span class="rating">95% Match</span>
+                <span class="duration">1h 10m</span>
+                <span class="genre">Romance</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Emily in Paris</div>
+              <div class="meta">
+                <span class="rating">92% Match</span>
+                <span class="duration">25m</span>
+                <span class="genre">Comedy</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Umbrella Academy</div>
+              <div class="meta">
+                <span class="rating">94% Match</span>
+                <span class="duration">50m</span>
+                <span class="genre">Sci-Fi</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m3.jpg">
+            <div class="overlay">
+              <div class="title">Squid Game</div>
+              <div class="meta">
+                <span class="rating">99% Match</span>
+                <span class="duration">1h 40m</span>
+                <span class="genre">Thriller</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Wednesday</div>
+              <div class="meta">
+                <span class="rating">97% Match</span>
+                <span class="duration">45m</span>
+                <span class="genre">Mystery</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Queen's Gambit</div>
+              <div class="meta">
+                <span class="rating">96% Match</span>
+                <span class="duration">1h 5m</span>
+                <span class="genre">Drama</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m2.jpg">
+            <div class="overlay">
+              <div class="title">Bridgerton</div>
+              <div class="meta">
+                <span class="rating">95% Match</span>
+                <span class="duration">1h 10m</span>
+                <span class="genre">Romance</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Emily in Paris</div>
+              <div class="meta">
+                <span class="rating">92% Match</span>
+                <span class="duration">25m</span>
+                <span class="genre">Comedy</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Umbrella Academy</div>
+              <div class="meta">
+                <span class="rating">94% Match</span>
+                <span class="duration">50m</span>
+                <span class="genre">Sci-Fi</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m3.jpg">
+            <div class="overlay">
+              <div class="title">Squid Game</div>
+              <div class="meta">
+                <span class="rating">99% Match</span>
+                <span class="duration">1h 40m</span>
+                <span class="genre">Thriller</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Wednesday</div>
+              <div class="meta">
+                <span class="rating">97% Match</span>
+                <span class="duration">45m</span>
+                <span class="genre">Mystery</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Queen's Gambit</div>
+              <div class="meta">
+                <span class="rating">96% Match</span>
+                <span class="duration">1h 5m</span>
+                <span class="genre">Drama</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m2.jpg">
+            <div class="overlay">
+              <div class="title">Bridgerton</div>
+              <div class="meta">
+                <span class="rating">95% Match</span>
+                <span class="duration">1h 10m</span>
+                <span class="genre">Romance</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Emily in Paris</div>
+              <div class="meta">
+                <span class="rating">92% Match</span>
+                <span class="duration">25m</span>
+                <span class="genre">Comedy</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Umbrella Academy</div>
+              <div class="meta">
+                <span class="rating">94% Match</span>
+                <span class="duration">50m</span>
+                <span class="genre">Sci-Fi</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow right" onclick="scrollRow(this, 1)"><span>›</span></div>
+      </div>
+
+      <div class="row-header">
+        <h2 class="row-title">Action Movies</h2>
+        <div class="dots">
+          <span class="dot active" onclick="scrollToPage(this, 0)"></span>
+          <span class="dot" onclick="scrollToPage(this, 1)"></span>
+          <span class="dot" onclick="scrollToPage(this, 2)"></span>
+        </div>
+      </div>
+      <div class="row-wrapper">
+        <div class="arrow left" onclick="scrollRow(this, -1)"><span>‹</span></div>
+        <div class="row">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">John Wick</div>
+              <div class="meta">
+                <span class="rating">98% Match</span>
+                <span class="duration">1h 41m</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="/images/m3.jpg">
+            <div class="overlay">
+              <div class="title">Mad Max: Fury Road</div>
+              <div class="meta">
+                <span class="rating">97% Match</span>
+                <span class="duration">2h</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Avengers: Endgame</div>
+              <div class="meta">
+                <span class="rating">96% Match</span>
+                <span class="duration">3h 1m</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">The Dark Knight</div>
+              <div class="meta">
+                <span class="rating">95% Match</span>
+                <span class="duration">2h 32m</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="images/m1.webp">
+            <div class="overlay">
+              <div class="title">Inception</div>
+              <div class="meta">
+                <span class="rating">94% Match</span>
+                <span class="duration">2h 28m</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80">
+            <div class="overlay">
+              <div class="title">Matrix</div>
+              <div class="meta">
+                <span class="rating">93% Match</span>
+                <span class="duration">2h 16m</span>
+                <span class="genre">Action</span>
+              </div>
+              <div class="buttons">
+                <button class="btn play">▶ Play</button>
+                <button class="btn info">ℹ More Info</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow right" onclick="scrollRow(this, 1)"><span>›</span></div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function scrollRow(el, direction) {
+      const row = el.parentElement.querySelector('.row');
+      const scrollAmount = 300;
+
+      // Check if we're at the end and scrolling right
+      if (direction > 0 && row.scrollLeft + row.clientWidth >= row.scrollWidth - 10) {
+        // Jump to beginning
+        row.scrollTo({ left: 0, behavior: 'smooth' });
+        updateDots(row, 0);
+        return;
+      }
+
+      // Check if we're at the beginning and scrolling left
+      if (direction < 0 && row.scrollLeft <= 10) {
+        // Jump to end
+        row.scrollTo({ left: row.scrollWidth - row.clientWidth, behavior: 'smooth' });
+        updateDots(row, 2);
+        return;
+      }
+
+      // Normal scrolling
+      row.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+
+      // Update dots after scrolling
+      setTimeout(() => {
+        updateDots(row);
+      }, 300);
+    }
+
+    function scrollToPage(dotEl, pageIndex) {
+      const rowHeader = dotEl.closest('.row-header');
+      const rowWrapper = rowHeader.nextElementSibling;
+      const row = rowWrapper.querySelector('.row');
+      const pageWidth = row.clientWidth;
+      const targetScroll = pageIndex * pageWidth;
+
+      row.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      updateDots(row, pageIndex);
+    }
+
+    function updateDots(row, forcedIndex = null) {
+      const rowWrapper = row.closest('.row-wrapper');
+      const dots = rowWrapper.querySelectorAll('.dot');
+
+      if (forcedIndex !== null) {
+        // Force specific dot to be active
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === forcedIndex);
+        });
+        return;
+      }
+
+      // Calculate which page we're on based on scroll position
+      const scrollLeft = row.scrollLeft;
+      const pageWidth = row.clientWidth;
+      const currentPage = Math.round(scrollLeft / pageWidth);
+
+      // Ensure we don't go out of bounds
+      const activeIndex = Math.min(Math.max(currentPage, 0), dots.length - 1);
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    // Update dots on scroll (for manual scrolling)
+    document.addEventListener('DOMContentLoaded', () => {
+      const rows = document.querySelectorAll('.row');
+      rows.forEach(row => {
+        row.addEventListener('scroll', () => {
+          updateDots(row);
+        });
+      });
+
+      // Add fade-in animation to rows
+      const rowWrappers = document.querySelectorAll('.row-wrapper');
+      rowWrappers.forEach((row, index) => {
+        setTimeout(() => {
+          row.classList.add('fade-in');
+        }, index * 200);
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>
