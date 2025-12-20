@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flexbox Visual Playground</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 24px;
+      background: #f1f5f9;
+    }
+
+    h2 {
+      margin-bottom: 4px;
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 16px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .group {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .group strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .group label {
+      display: block;
+      font-size: 14px;
+      margin: 4px 0;
+      cursor: pointer;
+    }
+
+    .flex-wrapper {
+      position: relative;
+    }
+
+    .axis-label {
+      position: absolute;
+      top: -22px;
+      right: 8px;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .flex-box {
+      height: 360px; /* 👈 increased height */
+      background-color: white;
+      border-radius: 12px;
+      display: flex;
+      gap: 12px;
+      padding: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+      /* Grid background */
+      background-image:
+        linear-gradient(to right, rgba(148,163,184,0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148,163,184,0.25) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .item {
+      background: #2563eb;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+
+      min-width: 56px;
+      min-height: 56px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Flexbox Visual Playground</h2>
+<p class="hint">
+  Grid helps you see spacing, alignment, and stretch behavior clearly.
+</p>
+
+<div class="controls">
+  <div class="group">
+    <strong>flex-direction</strong>
+    <label><input type="radio" name="direction" value="row" checked> row</label>
+    <label><input type="radio" name="direction" value="row-reverse"> row-reverse</label>
+    <label><input type="radio" name="direction" value="column"> column</label>
+    <label><input type="radio" name="direction" value="column-reverse"> column-reverse</label>
+  </div>
+
+  <div class="group">
+    <strong>justify-content</strong>
+    <label><input type="radio" name="justify" value="flex-start" checked> flex-start</label>
+    <label><input type="radio" name="justify" value="center"> center</label>
+    <label><input type="radio" name="justify" value="space-between"> space-between</label>
+    <label><input type="radio" name="justify" value="space-around"> space-around</label>
+    <label><input type="radio" name="justify" value="space-evenly"> space-evenly</label>
+  </div>
+
+  <div class="group">
+    <strong>align-items</strong>
+    <label><input type="radio" name="align" value="flex-start"> flex-start</label>
+    <label><input type="radio" name="align" value="center" checked> center</label>
+    <label><input type="radio" name="align" value="flex-end"> flex-end</label>
+    <label><input type="radio" name="align" value="stretch"> stretch</label>
+  </div>
+</div>
+
+<div class="flex-wrapper">
+  <div id="axisLabel" class="axis-label">Cross-axis: height</div>
+
+  <div id="flexBox" class="flex-box">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+  </div>
+</div>
+
+<script>
+  const flexBox = document.getElementById('flexBox');
+  const items = document.querySelectorAll('.item');
+  const axisLabel = document.getElementById('axisLabel');
+
+  function updateFlex() {
+    const direction = document.querySelector('input[name="direction"]:checked').value;
+    const justify = document.querySelector('input[name="justify"]:checked').value;
+    const align = document.querySelector('input[name="align"]:checked').value;
+
+    flexBox.style.flexDirection = direction;
+    flexBox.style.justifyContent = justify;
+    flexBox.style.alignItems = align;
+
+    const isRow = direction.startsWith('row');
+    axisLabel.textContent = `Cross-axis: ${isRow ? 'height' : 'width'}`;
+
+    items.forEach(item => {
+      if (isRow) {
+        item.style.width = '56px';
+        item.style.height = align === 'stretch' ? 'auto' : '56px';
+      } else {
+        item.style.height = '56px';
+        item.style.width = align === 'stretch' ? 'auto' : '56px';
+      }
+    });
+  }
+
+  document.querySelectorAll('input[type="radio"]').forEach(radio =>
+    radio.addEventListener('change', updateFlex)
+  );
+
+  updateFlex();
+</script>
+
+</body>
+</html>
