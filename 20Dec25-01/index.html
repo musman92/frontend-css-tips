@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CSS Position – Complete Visual Demo</title>
+
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 20px;
+  }
+
+  h2 { margin-bottom: 10px; }
+
+  .controls label {
+    margin-right: 14px;
+    cursor: pointer;
+  }
+
+  .inputs {
+    margin: 12px 0;
+    display: none;
+    gap: 10px;
+  }
+
+  .inputs input {
+    width: 70px;
+    padding: 4px;
+  }
+
+  .stage {
+    margin-top: 15px;
+    border: 2px solid #475569;
+    padding: 20px;
+    background: #020617;
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stage::before {
+    content: "Viewport";
+    position: absolute;
+    top: -18px;
+    left: 10px;
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .parent {
+    position: relative;
+    height: 160px;
+    border: 2px dashed #38bdf8;
+    padding: 10px;
+  }
+
+  .parent::before {
+    content: "Parent Container";
+    position: absolute;
+    top: -18px;
+    left: 10px;
+    font-size: 12px;
+    color: #38bdf8;
+  }
+
+  .box {
+    width: 120px;
+    height: 60px;
+    background: #22c55e;
+    color: #022c22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.25s ease;
+  }
+
+  /* Sticky demo */
+  .sticky-area {
+    display: none;
+    height: 200px;
+    overflow-y: auto;
+    border: 2px dashed #a855f7;
+    padding: 10px;
+  }
+
+  .sticky-area::before {
+    content: "Scroll Area (Sticky)";
+    display: block;
+    font-size: 12px;
+    color: #a855f7;
+    margin-bottom: 8px;
+  }
+
+  .spacer {
+    height: 120px;
+  }
+
+  .info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #cbd5f5;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>CSS <code>position</code> — Interactive Visual</h2>
+
+<div class="controls">
+  <label><input type="radio" name="pos" value="static" checked> static</label>
+  <label><input type="radio" name="pos" value="relative"> relative</label>
+  <label><input type="radio" name="pos" value="absolute"> absolute</label>
+  <label><input type="radio" name="pos" value="fixed"> fixed</label>
+  <label><input type="radio" name="pos" value="sticky"> sticky</label>
+</div>
+
+<div class="inputs" id="xyInputs">
+  X: <input type="number" id="x" value="20"> px
+  Y: <input type="number" id="y" value="20"> px
+</div>
+
+<!-- Normal stage -->
+<div class="stage" id="stage">
+  <div class="parent">
+    <div class="box" id="box">BOX</div>
+  </div>
+</div>
+
+<!-- Sticky stage -->
+<div class="sticky-area" id="stickyArea">
+  <div class="spacer"></div>
+  <div class="box" id="stickyBox">STICKY</div>
+  <div class="spacer"></div>
+</div>
+
+<div class="info" id="info"></div>
+
+<script>
+  const box = document.getElementById("box");
+  const stickyBox = document.getElementById("stickyBox");
+  const info = document.getElementById("info");
+  const radios = document.querySelectorAll("input[name='pos']");
+  const xyInputs = document.getElementById("xyInputs");
+  const xInput = document.getElementById("x");
+  const yInput = document.getElementById("y");
+  const stage = document.getElementById("stage");
+  const stickyArea = document.getElementById("stickyArea");
+
+  function reset() {
+    box.style.position = "static";
+    box.style.top = "";
+    box.style.left = "";
+    stickyBox.style.position = "static";
+    stickyBox.style.top = "";
+    xyInputs.style.display = "none";
+    stage.style.display = "block";
+    stickyArea.style.display = "none";
+  }
+
+  function applyXY() {
+    box.style.left = xInput.value + "px";
+    box.style.top = yInput.value + "px";
+  }
+
+  function update(pos) {
+    reset();
+
+    if (pos === "static") {
+      info.textContent =
+        "static: Default layout. X/Y do not apply.";
+    }
+
+    if (pos === "relative") {
+      box.style.position = "relative";
+      box.style.left = "20px";
+      box.style.top = "20px";
+      info.textContent =
+        "relative: Moves from its original position. Space is preserved.";
+    }
+
+    if (pos === "absolute") {
+      box.style.position = "absolute";
+      xyInputs.style.display = "flex";
+      applyXY();
+      info.textContent =
+        "absolute: Positioned using X/Y relative to the parent container.";
+    }
+
+    if (pos === "fixed") {
+      box.style.position = "fixed";
+      xyInputs.style.display = "flex";
+      applyXY();
+      info.textContent =
+        "fixed: Positioned using X/Y relative to the viewport.";
+    }
+
+    if (pos === "sticky") {
+      stage.style.display = "none";
+      stickyArea.style.display = "block";
+      stickyBox.style.position = "sticky";
+      stickyBox.style.top = "10px";
+      info.textContent =
+        "sticky: Scroll until the box reaches top: 10px — then it sticks.";
+    }
+  }
+
+  radios.forEach(radio =>
+    radio.addEventListener("change", e => update(e.target.value))
+  );
+
+  xInput.addEventListener("input", applyXY);
+  yInput.addEventListener("input", applyXY);
+</script>
+
+</body>
+</html>
