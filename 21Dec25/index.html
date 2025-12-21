@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS z-index Interactive Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .control-box {
+      font-size: 14px;
+    }
+
+    .container {
+      position: relative;
+      height: 300px;
+      border: 2px dashed #aaa;
+      margin-top: 20px;
+    }
+
+    .box {
+      width: 140px;
+      height: 140px;
+      color: #fff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box1 {
+      background: #ff4757;
+      top: 40px;
+      left: 40px;
+    }
+
+    .box2 {
+      background: #1e90ff;
+      top: 80px;
+      left: 80px;
+    }
+
+    .box3 {
+      background: #2ed573;
+      top: 120px;
+      left: 120px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>CSS z-index Live Demo</h2>
+<p>Change <b>z-index</b> and <b>position</b> to see how stacking works.</p>
+
+<div class="controls">
+  <div class="control-box">
+    <b>Red Box</b><br>
+    z-index: <input type="number" value="1" oninput="updateBox(1, 'z', this.value)"><br>
+    position:
+    <select onchange="updateBox(1, 'p', this.value)">
+      <option>static</option>
+      <option selected>relative</option>
+      <option>absolute</option>
+    </select>
+  </div>
+
+  <div class="control-box">
+    <b>Blue Box</b><br>
+    z-index: <input type="number" value="2" oninput="updateBox(2, 'z', this.value)"><br>
+    position:
+    <select onchange="updateBox(2, 'p', this.value)">
+      <option>static</option>
+      <option selected>relative</option>
+      <option>absolute</option>
+    </select>
+  </div>
+
+  <div class="control-box">
+    <b>Green Box</b><br>
+    z-index: <input type="number" value="3" oninput="updateBox(3, 'z', this.value)"><br>
+    position:
+    <select onchange="updateBox(3, 'p', this.value)">
+      <option>static</option>
+      <option selected>relative</option>
+      <option>absolute</option>
+    </select>
+  </div>
+</div>
+
+<div class="container">
+  <div class="box box1" style="z-index: 1;">Box 1</div>
+  <div class="box box2" style="z-index: 2;">Box 2</div>
+  <div class="box box3" style="z-index: 3;">Box 3</div>
+</div>
+
+<script>
+  function updateBox(num, type, value) {
+    const box = document.querySelector('.box' + num);
+
+    if (type === 'z') {
+      box.style.zIndex = value;
+    }
+
+    if (type === 'p') {
+      box.style.position = value;
+    }
+  }
+</script>
+
+</body>
+</html>
