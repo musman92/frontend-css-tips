@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pseudo Elements – Placeholder & Selection</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+  }
+
+  body {
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 40px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .card {
+    background: #020617;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 420px;
+    margin-bottom: 40px;
+  }
+
+  /* INPUT */
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #e5e7eb;
+    font-size: 16px;
+    outline: none;
+  }
+
+  input:focus {
+    border-color: #22c55e;
+  }
+
+  /* PLACEHOLDER */
+  input::placeholder {
+    color: #22c55e;
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* SELECTION */
+  ::selection {
+    background: #22c55e;
+    color: #000;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>CSS Pseudo-Elements Demo</h1>
+
+<div class="card">
+  <input type="text" placeholder="Type your email address" />
+</div>
+
+<p>
+  Select this text to see how the ::selection pseudo-element works.
+  It changes the highlight color without extra code.
+</p>
+
+</body>
+</html>

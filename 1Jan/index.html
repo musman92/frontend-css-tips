@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+  --item-width: 250px;
+  --gap: 40px;
+}
+
+body {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.slider-viewport {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.slider-track {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.slider-item {
+  width: var(--item-width);
+  flex: 0 0 auto;
+  cursor: pointer;
+  transition: all 0.6s ease;
+  user-select: none;
+}
+
+.slider-item img {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+  pointer-events: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* --- STATES --- */
+
+/* Center: Large & Bright */
+.slider-item.is-center {
+  transform: scale(1.4);
+  z-index: 10;
+  opacity: 1;
+}
+
+/* Adjacent: Medium & Slightly Faded */
+.slider-item.is-adjacent {
+  transform: scale(1);
+  z-index: 5;
+  opacity: 0.6;
+}
+
+/* Outer: Small & Very Faded */
+.slider-item.is-outer {
+  transform: scale(0.7);
+  z-index: 1;
+  opacity: 0.2;
+  filter: blur(2px);
+}
+    </style>
+</head>
+<body>
+    <div class="slider-viewport">
+  <div class="slider-track">
+    <div class="slider-item"><img src="https://picsum.photos/400/600?random=1" alt="1"></div>
+    <div class="slider-item"><img src="https://picsum.photos/400/600?random=2" alt="2"></div>
+    <div class="slider-item"><img src="https://picsum.photos/400/600?random=3" alt="3"></div>
+    <div class="slider-item"><img src="https://picsum.photos/400/600?random=4" alt="4"></div>
+    <div class="slider-item"><img src="https://picsum.photos/400/600?random=5" alt="5"></div>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const items = Array.from(document.querySelectorAll(".circle-item"));
+  let activeIndex = 2; // Start with the middle one
+
+  function update() {
+    items.forEach((item, index) => {
+      // Calculate how far this item is from the active one
+      let diff = index - activeIndex;
+
+      // Logic to make it feel like a circle/arc
+      // x = horizontal spread, z = depth, scale = size
+      let x = diff * 220; // Increase this to spread images further apart
+      let z = Math.abs(diff) * -150; // Move non-active items backward
+      let scale = 1 - Math.abs(diff) * 0.2; // Shrink side items
+      let opacity = 1 - Math.abs(diff) * 0.3; // Fade side items
+      let rotateY = diff * -20; // Rotate items slightly towards center
+
+      // Special z-index to ensure center is always on top
+      item.style.zIndex = 10 - Math.abs(diff);
+
+      item.style.transform = `
+        translateX(${x}px) 
+        translateZ(${z}px) 
+        scale(${scale}) 
+        rotateY(${rotateY}deg)
+      `;
+      
+      item.style.opacity = opacity;
+
+      // Handle CSS classes for extra styling
+      item.classList.remove('is-center', 'is-adjacent', 'is-outer');
+      if (diff === 0) item.classList.add('is-center');
+      else if (Math.abs(diff) === 1) item.classList.add('is-adjacent');
+      else item.classList.add('is-outer');
+    });
+  }
+
+  items.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      activeIndex = index;
+      update();
+    });
+  });
+
+  update(); // Initial position
+});
+</script>
+</body>
+</html>

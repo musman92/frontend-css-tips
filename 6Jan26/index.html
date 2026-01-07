@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CSS Pseudo Elements Live Demo</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+  }
+
+  body {
+    background: #0f172a;
+    color: #e5e7eb;
+    padding: 40px;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  /* CARD */
+  .card {
+    position: relative;
+    background: #020617;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+
+  /* BADGE */
+  .card::before {
+    content: "NEW";
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #22c55e;
+    color: #000;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: bold;
+  }
+
+  /* OVERLAY */
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(34,197,94,.15));
+    pointer-events: none;
+  }
+
+  /* BUTTON */
+  .btn {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    color: #22c55e;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: currentColor;
+    transition: width .3s ease;
+  }
+
+  .btn:hover::after {
+    width: 100%;
+  }
+
+  /* TYPOGRAPHY */
+  p::first-letter {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #22c55e;
+    margin-right: 6px;
+  }
+
+  /* TEXT SELECTION */
+  ::selection {
+    background: #22c55e;
+    color: #000;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>CSS Pseudo-Elements – Live Demo</h1>
+
+<div class="card">
+  <p>
+    Pseudo-elements allow you to style parts of an element or add visuals
+    without writing extra HTML.
+  </p>
+
+  <a href="#" class="btn">Hover Me</a>
+</div>
+
+<p>
+  Select this text to see custom selection styling in action.
+</p>
+
+</body>
+</html>
