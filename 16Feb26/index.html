@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>px vs rem Responsive Comparison</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* Root font size */
+    html {
+      font-size: 16px;
+    }
+
+    /* Simulate mobile scaling */
+    @media (max-width: 600px) {
+      html {
+        font-size: 13px; /* Everything using rem will shrink */
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    .wrapper {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* PX CARD */
+    .px-card {
+      width: 320px;
+      padding: 32px;
+      border-radius: 16px;
+      background: #ffe5e5;
+    }
+
+    .px-card h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .px-card p {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* REM CARD */
+    .rem-card {
+      width: 20rem;          /* 320px */
+      padding: 2rem;         /* 32px */
+      border-radius: 1rem;   /* 16px */
+      background: #e5f0ff;
+    }
+
+    .rem-card h2 {
+      font-size: 1.5rem;     /* 24px */
+      margin-bottom: 1rem;   /* 16px */
+    }
+
+    .rem-card p {
+      font-size: 1rem;       /* 16px */
+      margin-bottom: 1.5rem; /* 24px */
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>px vs rem Responsive Demo</h1>
+  <p>Resize your browser below 600px width.</p>
+
+  <div class="wrapper">
+
+    <div class="px-card">
+      <h2>Using PX</h2>
+      <p>
+        Padding, font size, width, and spacing are fixed.
+        This card does NOT scale on mobile.
+      </p>
+    </div>
+
+    <div class="rem-card">
+      <h2>Using REM</h2>
+      <p>
+        Padding, font size, width, and spacing scale
+        when the root font size changes.
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>
